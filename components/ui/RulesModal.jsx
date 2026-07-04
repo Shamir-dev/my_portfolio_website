@@ -36,6 +36,10 @@ export default function RulesModal({ open, onClose }) {
             </div>
 
             <ul className="mt-5 space-y-3 text-sm leading-relaxed text-text-muted">
+                <li>
+                <span className="text-accent">▸</span> Marks divide into two parts
+                  <strong className="text-text-primary"> a)Correct Answer b)Fast Answer</strong> 
+              </li>
               <li>
                 <span className="text-accent">▸</span> Each correct answer is
                 worth <strong className="text-text-primary">0.5 points</strong> for accuracy.
@@ -47,19 +51,19 @@ export default function RulesModal({ open, onClose }) {
               </li>
               <li>
                 <span className="text-accent">▸</span> Finish in under{' '}
-                <strong className="text-text-primary">0.8s × number of questions</strong>{' '}
-                (e.g. 8s for 10 questions) → +0.5 bonus per correct answer (full marks).
+                <strong className="text-text-primary">2.5s × number of questions</strong>{' '}
+                (e.g. 25s for 10 questions) → +0.5 bonus per correct answer(100%) for Fast Answer.
               </li>
               <li>
                 <span className="text-accent">▸</span> Finish in under{' '}
-                <strong className="text-text-primary">1.2s × number of questions</strong>{' '}
-                (e.g. 12s for 10 questions) → +0.35 bonus per correct answer (70%).
+                <strong className="text-text-primary">3.5s × number of questions</strong>{' '}
+                (e.g. 35s for 10 questions) → +0.35 bonus per correct answer (70%).
               </li>
               <li>
                 <span className="text-accent">▸</span> Slower than that → +0.25
                 bonus per correct answer (50%).
               </li>
-              <li>
+              {/* <li>
                 <span className="text-accent">▸</span> Max possible per question
                 is 1.0 — your final score is shown as a percentage.
               </li>
@@ -68,7 +72,7 @@ export default function RulesModal({ open, onClose }) {
                 <strong className="text-text-primary">45 seconds</strong>, the
                 quiz pauses automatically. Paused time doesn't count toward
                 your total time.
-              </li>
+              </li> */}
               <li>
                 <span className="text-accent">▸</span> Each question-count
                 mode (10/15/20/25) has its own high score, shown after you finish.
