@@ -1,8 +1,8 @@
 'use client';
-
+import { RefreshCw, Brain, Pause, RotateCcw, Play, ChevronLeft } from 'lucide-react';
 import { useState, useCallback, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { RefreshCw, Brain, Pause } from 'lucide-react';
+// import { RefreshCw, Brain, Pause } from 'lucide-react';
 import QuizSettings from '@/components/ui/QuizSettings';
 import QuizTimer from '@/components/ui/QuizTimer';
 import Leaderboard from '@/components/ui/Leaderboard';
@@ -43,10 +43,10 @@ function generateQuestion() {
 }
 
 // Speed bonus applied to EVERY correct answer, based on total quiz time.
-// Thresholds scale with question count ( 25s/35s are callibrated for 10 questions). time adjusted for more practicality
+// Thresholds scale with question count (8s / 12s are calibrated for 10 questions).
 function getTimeBonus(totalSeconds, questionCount) {
-  const fast = questionCount * 2.5; // e.g. 25s for 10 questions
-  const ok = questionCount * 3.5; // e.g. 35for 10 questions
+  const fast = questionCount * 0.8; // e.g. 8s for 10 questions
+  const ok = questionCount * 1.2; // e.g. 12s for 10 questions
   if (totalSeconds <= fast) return 0.5;
   if (totalSeconds <= ok) return 0.35;
   return 0.25;
@@ -196,17 +196,56 @@ export default function Playground() {
           {/* Persistent timer header — stays mounted across question changes
               so it never visibly resets, only the question card animates. */}
           {(phase === 'playing' || phase === 'paused') && (
-            <div className="mb-4 flex items-center justify-between">
-              <span className="font-mono text-xs text-text-muted">
-                Question {Math.min(round, questionCount)} / {questionCount}
-              </span>
-              <QuizTimer
-                startTime={quizStartRef.current}
-                pausedMs={pausedMs}
-                frozen={phase === 'paused'}
-              />
-            </div>
-          )}
+  <div className="mb-4 flex items-center justify-between">
+    {/* Left: question counter + Retry + Pause icons */}
+    <div className="flex items-center gap-3">
+  <button
+    onClick={restart}
+    title="Back to quiz settings"
+    className="text-text-muted transition-colors hover:text-accent"
+  >
+    <ChevronLeft size={16} />
+  </button>
+  <span className="font-mono text-xs text-text-muted">
+    Question {Math.min(round, questionCount)} / {questionCount}
+  </span>
+  <button
+    onClick={startQuiz}
+    title="Restart quiz"
+    className="text-text-muted transition-colors hover:text-accent"
+  >
+    <RotateCcw size={15} />
+  </button>
+  {phase === 'playing' ? (
+    <button
+      onClick={() => {
+        pauseStartRef.current = Date.now();
+        setPhase('paused');
+      }}
+      title="Pause quiz"
+      className="text-text-muted transition-colors hover:text-accent"
+    >
+      <Pause size={15} />
+    </button>
+  ) : (
+    <button
+      onClick={resumeQuiz}
+      title="Resume quiz"
+      className="text-text-muted transition-colors hover:text-accent"
+    >
+      <Play size={15} />
+    </button>
+  )}
+</div>
+
+    {/* Right: running timer */}
+    <QuizTimer
+      startTime={quizStartRef.current}
+      pausedMs={pausedMs}
+      frozen={phase === 'paused'}
+    />
+  </div>
+)}
 
           <AnimatePresence mode="wait">
             {phase === 'settings' && (
