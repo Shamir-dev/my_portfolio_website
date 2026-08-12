@@ -5,6 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import {
   ArrowRight,
   Briefcase,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  ChevronUp,
   Code2,
   ExternalLink,
   Gamepad2,
@@ -49,6 +53,8 @@ const projects = [
       'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=80',
     description:
       'Developed a full-stack financial utility integrating third-party REST APIs with a Python Flask backend to securely fetch, cache, and display real-time exchange rates.',
+      liveUrl:'',
+      githubUrl:''
   },
   {
     title: 'EduSphere Tutor Workspace',
@@ -127,6 +133,7 @@ const fadeUp = {
 
 export default function Home() {
   const [gameOpen, setGameOpen] = useState(false);
+  const [moreGamesOpen, setMoreGamesOpen] = useState(true);
 
   return (
     <main className="relative overflow-x-hidden bg-slate-50 text-slate-900">
@@ -512,11 +519,11 @@ export default function Home() {
 
             <div className="flex items-center gap-3">
               <div className="hidden items-center gap-2 rounded-full bg-slate-100 px-3 py-2 text-sm font-medium text-slate-700 md:inline-flex">
-                <span className="text-base">🎮</span>
-                {gameOpen ? 'Collapse' : 'Open'}
+                <Gamepad2 size={15} />
+                <span>Open</span>
               </div>
-              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-lg text-slate-700 transition hover:border-slate-300 hover:bg-slate-100">
-                {gameOpen ? '→' : '←'}
+              <div className="flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-slate-50 text-slate-700 transition hover:border-slate-300 hover:bg-slate-100">
+                {gameOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
               </div>
             </div>
           </button>
@@ -530,8 +537,8 @@ export default function Home() {
                 transition={{ duration: 0.35, ease: 'easeOut' }}
                 className="overflow-hidden border-t border-slate-200"
               >
-                <div className="grid gap-5 bg-gradient-to-br from-white via-slate-50 to-blue-50 p-4 md:grid-cols-[1.35fr_0.65fr] md:p-6">
-                  <div className="rounded-[26px] border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)] md:p-5">
+                <div className="grid gap-5 bg-gradient-to-br from-white via-slate-50 to-blue-50 p-4 md:grid-cols-[minmax(0,1fr)_auto] md:p-6">
+                  <div className="min-w-0 rounded-[26px] border border-slate-200 bg-white p-4 shadow-[0_10px_30px_rgba(15,23,42,0.04)] md:p-5">
                     <div className="mb-4 flex items-center justify-between gap-3">
                       <div>
                         <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600">Mini challenge</p>
@@ -544,28 +551,69 @@ export default function Home() {
                     <Playground />
                   </div>
 
-                  <div className="rounded-[26px] border border-slate-200 bg-gradient-to-br from-slate-50 to-blue-50 p-5 shadow-inner shadow-blue-100/60">
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-blue-600">More games</p>
-                    <h4 className="mt-3 text-2xl font-black tracking-[-0.04em] text-slate-900">Coming soon</h4>
-                    <p className="mt-3 text-sm leading-7 text-slate-600">
-                      Puzzle, typing, and logic games will be added here in future updates to keep the portfolio playful and interactive.
-                    </p>
-
-                    <div className="mt-5 space-y-3">
-                      {[
-                        { emoji: '🧩', label: 'Puzzle' },
-                        { emoji: '⌨️', label: 'Typing' },
-                        { emoji: '🧠', label: 'Logic' },
-                      ].map((item) => (
-                        <div key={item.label} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm">
-                          <div className="flex items-center gap-2 text-slate-700">
-                            <span className="text-lg">{item.emoji}</span>
-                            <span className="text-sm font-medium">{item.label}</span>
+                  <div
+                    className={`overflow-hidden rounded-[26px] border border-slate-200 bg-gradient-to-br from-slate-50 to-blue-50 shadow-inner shadow-blue-100/60 transition-all duration-300 ease-out ${
+                      moreGamesOpen ? 'w-full md:w-[300px]' : 'w-[72px]'
+                    }`}
+                  >
+                    <button
+                      type="button"
+                      onClick={() => setMoreGamesOpen((value) => !value)}
+                      className={`flex w-full items-center ${
+                        moreGamesOpen ? 'justify-between gap-3 p-4' : 'justify-center p-3'
+                      } text-left`}
+                    >
+                      {moreGamesOpen ? (
+                        <>
+                          <div className="flex min-w-0 items-center gap-2 text-slate-900">
+                            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-blue-600 shadow-sm">
+                              <Gamepad2 size={16} />
+                            </div>
+                            <span className="truncate text-sm font-semibold text-slate-700">More games</span>
                           </div>
-                          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Soon</span>
+
+                          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm">
+                            <ChevronRight size={16} />
+                          </div>
+                        </>
+                      ) : (
+                        <div className="flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm">
+                          <ChevronLeft size={16} />
                         </div>
-                      ))}
-                    </div>
+                      )}
+                    </button>
+
+                    <AnimatePresence initial={false}>
+                      {moreGamesOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: 'auto', opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.25, ease: 'easeOut' }}
+                          className="overflow-hidden px-4 pb-4"
+                        >
+                          <p className="text-sm leading-7 text-slate-600">
+                            Puzzle, typing, and logic games will be added here in future updates to keep the portfolio playful and interactive.
+                          </p>
+
+                          <div className="mt-5 space-y-3">
+                            {[
+                              { emoji: '🧩', label: 'Puzzle' },
+                              { emoji: '⌨️', label: 'Typing' },
+                              { emoji: '🧠', label: 'Logic' },
+                            ].map((item) => (
+                              <div key={item.label} className="flex items-center justify-between rounded-2xl border border-slate-200 bg-white px-3 py-2.5 shadow-sm">
+                                <div className="flex items-center gap-2 text-slate-700">
+                                  <span className="text-lg">{item.emoji}</span>
+                                  <span className="text-sm font-medium">{item.label}</span>
+                                </div>
+                                <span className="text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">Soon</span>
+                              </div>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
               </motion.div>
