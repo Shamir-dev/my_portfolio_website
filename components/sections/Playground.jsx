@@ -43,10 +43,10 @@ function generateQuestion() {
 }
 
 // Speed bonus applied to EVERY correct answer, based on total quiz time.
-// Thresholds scale with question count (8s / 12s are calibrated for 10 questions).
+// Thresholds scale with question count (25s / 35s are calibrated for 10 questions). changed july04 /26 from 8s/12s mode
 function getTimeBonus(totalSeconds, questionCount) {
-  const fast = questionCount * 0.8; // e.g. 8s for 10 questions
-  const ok = questionCount * 1.2; // e.g. 12s for 10 questions
+  const fast = questionCount * 2.5; // e.g. 25s for 10 questions
+  const ok = questionCount * 3.5; // e.g. 35s for 10 questions
   if (totalSeconds <= fast) return 0.5;
   if (totalSeconds <= ok) return 0.35;
   return 0.25;
