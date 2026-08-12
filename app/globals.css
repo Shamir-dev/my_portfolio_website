@@ -1,10 +1,9 @@
 @import "tailwindcss";
 @import "../styles/tokens.css";
-@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --color-base: var(--bg-base);
-  --color-base-deep: #0A0C10;
+  --color-base-deep: #0f172a;
   --color-surface: var(--bg-surface);
   --color-text-primary: var(--text-primary);
   --color-text-muted: var(--text-muted);
@@ -13,4 +12,38 @@
   --font-display: var(--font-display-family), sans-serif;
   --font-body: var(--font-body-family), sans-serif;
   --font-mono: var(--font-mono-family), monospace;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  font-family: var(--font-body-family), sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at top, rgba(148, 163, 184, 0.12), transparent 20%),
+    linear-gradient(180deg, #f8fafc 0%, #f8fafc 100%);
+}
+
+a {
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
