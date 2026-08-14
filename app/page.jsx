@@ -20,6 +20,8 @@ import {
   Sparkles,
   Star,
 } from 'lucide-react';
+
+
 import Playground from '@/components/sections/Playground';
 
 const skillGroups = [
@@ -50,19 +52,20 @@ const projects = [
     title: 'Currency Converter',
     tag: 'Currency Exchange API',
     image:
-      'https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&w=900&q=80',
+      'currencyConverter.png',
     description:
       'Developed a full-stack financial utility integrating third-party REST APIs with a Python Flask backend to securely fetch, cache, and display real-time exchange rates.',
-      liveUrl:'',
+      liveUrl:'https://currencyexchangeapi.netlify.app/',
       githubUrl:''
   },
   {
     title: 'EduSphere Tutor Workspace',
     tag: 'PeerTutor WebApp',
     image:
-      'https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80',
+      'eduSphere.png',
     description:
       'Engineered a peer-tutoring web platform using modern frontend frameworks to connect students and tutors, streamlining interactive educational workflows and scheduling.',
+      liveUrl:'https://fe-tutor-rho.vercel.app/'
   },
   {
     title: 'shamiraryal.com.np',
@@ -71,22 +74,26 @@ const projects = [
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
     description:
       'Built a highly responsive personal website leveraging Next.js and Tailwind CSS to effectively showcase software projects and technical writing.',
+      liveUrl:'https://www.shamiraryal.com.np'
   },
   {
     title: 'BlogPost Ideas Worth Sharing',
     tag: 'BlogPost FullStack',
     image:
-      'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80',
+      'blogPost.png',
     description:
       'Engineered a full-stack content publishing web application with secure user authentication, dynamic Markdown rendering, and role-based access control.',
+      liveUrl:'https://blogpostsamir.netlify.app/'
+
   },
   {
     title: 'Pro Coder Typing Club',
     tag: 'Typing Practice Platform',
     image:
-      'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=900&q=80',
+      'proCoder.png',
     description:
       'Architected a customizable DSA code-typing platform featuring over 100 interactive lessons, real-time syntax highlighting, and WPM/accuracy tracking.',
+      liveUrl:'https://blogpostsamir.netlify.app/'
   },
 ];
 
@@ -228,7 +235,7 @@ export default function Home() {
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center gap-2 text-slate-500"><Phone size={15} /> Phone</div>
-                <p className="mt-2 text-sm font-semibold text-slate-800">+977 974252521092</p>
+                <p className="mt-2 text-sm font-semibold text-slate-800">+977 9742521092</p>
               </div>
               <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
                 <div className="flex items-center gap-2 text-slate-500"><MapPin size={15} /> Location</div>
@@ -261,8 +268,9 @@ export default function Home() {
 
                 <div className="mt-4 overflow-hidden rounded-[24px] border border-slate-200 bg-white">
                   <img
-                    src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
-                    alt="Samir Aryal"
+                    // src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
+                    src = 'samir.png'
+                    alt="Shamir Aryal"
                     className="h-[420px] w-full object-cover"
                   />
                 </div>
@@ -389,30 +397,43 @@ export default function Home() {
           <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-slate-900">Selected work built end-to-end with product thinking.</h2>
         </motion.div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project, index) => (
-            <motion.article
-              key={project.title}
-              initial={{ opacity: 0, y: 24 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.45, delay: index * 0.1, ease: 'easeOut' }}
-              className="group overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.04)]"
-            >
-              <div className="overflow-hidden">
-                <img src={project.image} alt={project.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
-              </div>
-              <div className="p-6">
-                <span className="inline-block rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700">{project.tag}</span>
-                <h3 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-slate-900">{project.title}</h3>
-                <p className="mt-3 text-base leading-7 text-slate-600">{project.description}</p>
-                <div className="mt-5 flex items-center justify-between text-sm text-slate-500">
-                  <span className="inline-flex items-center gap-2"><Star size={14} className="text-amber-500" /> Full-stack build</span>
-                  <ExternalLink size={15} className="transition group-hover:translate-x-0.5" />
-                </div>
-              </div>
-            </motion.article>
-          ))}
+           <div className="mt-10 grid gap-6md:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project, index) => {
+            const CardWrapper = project.liveUrl ? 'a' : 'div';
+            const linkProps = project.liveUrl
+              ? { href: project.liveUrl, target: '_blank', rel: 'noopener noreferrer' }
+              : {};
+
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.1, ease: 'easeOut' }}
+              >
+                <CardWrapper
+                  {...linkProps}
+                  className={`group block overflow-hidden rounded-[28px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.04)] ${
+                    project.liveUrl ? 'cursor-pointer' : 'cursor-default opacity-90'
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <img src={project.image} alt={project.title} className="h-56 w-full object-cover transition duration-500 group-hover:scale-105" />
+                  </div>
+                  <div className="p-6">
+                    <span className="inline-block rounded-full bg-blue-50 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-blue-700">{project.tag}</span>
+                    <h3 className="mt-4 text-2xl font-bold tracking-[-0.04em] text-slate-900">{project.title}</h3>
+                    <p className="mt-3 text-base leading-7 text-slate-600">{project.description}</p>
+                    <div className="mt-5 flex items-center justify-between text-sm text-slate-500">
+                      <span className="inline-flex items-center gap-2"><Star size={14} className="text-amber-500" /> Full-stack build</span>
+                      {project.liveUrl && <ExternalLink size={15} className="transition group-hover:translate-x-0.5" />}
+                    </div>
+                  </div>
+                </CardWrapper>
+              </motion.div>
+            );
+          })}
         </div>
       </section>
 
