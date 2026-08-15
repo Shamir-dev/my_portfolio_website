@@ -90,7 +90,7 @@ const projects = [
     title: 'Pro Coder Typing Club',
     tag: 'Typing Practice Platform',
     image:
-      'proCoder.png',
+      'procoder.png',
     description:
       'Architected a customizable DSA code-typing platform featuring over 100 interactive lessons, real-time syntax highlighting, and WPM/accuracy tracking.',
       liveUrl:'https://blogpostsamir.netlify.app/'

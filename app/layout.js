@@ -9,6 +9,10 @@ export const metadata = {
   title: 'Shamir Aryal | Portfolio',
   description:
     'Full-Stack Developer Intern and BSc CSIT student building responsive web applications with React, Next.js, Tailwind, Python, Flask, SQL, and MongoDB.',
+    icons : {
+
+      icon:'/titleicon.png'
+    }
 };
 
 export default function RootLayout({ children }) {
