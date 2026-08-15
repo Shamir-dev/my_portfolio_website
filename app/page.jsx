@@ -269,7 +269,7 @@ export default function Home() {
                 <div className="mt-4 overflow-hidden rounded-[24px] border border-slate-200 bg-white">
                   <img
                     // src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
-                    src = 'samir.png'
+                    src = '/samir.png'
                     alt="Shamir Aryal"
                     className="h-[420px] w-full object-cover"
                   />
