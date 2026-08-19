@@ -93,7 +93,7 @@ const projects = [
       'procoder.png',
     description:
       'Architected a customizable DSA code-typing platform featuring over 100 interactive lessons, real-time syntax highlighting, and WPM/accuracy tracking.',
-      liveUrl:'https://blogpostsamir.netlify.app/'
+      liveUrl:'https://procoder-po1s.onrender.com/'
   },
 ];
 
@@ -265,13 +265,35 @@ export default function Home() {
                   </div>
                   <span className="text-[10px] font-medium uppercase tracking-[0.2em] text-slate-500">Portfolio</span>
                 </div>
-
-                <div className="mt-4 overflow-hidden rounded-[24px] border border-slate-200 bg-white">
-                  <img
-                    // src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=900&q=80"
-                    src = '/samir.png'
+                
+              
+                <div className="overflow-hidden">
+                  <motion.img
+                    src="/samir.png"
                     alt="Shamir Aryal"
                     className="h-[420px] w-full object-cover"
+                    
+                    // Continuous subtle motion
+                    animate={{
+                      scale: [1, 1.03, 1],
+                      x: [0, 3, 0],
+                      y: [0, -3, 0],
+                    }}
+                    transition={{
+                      duration: 6,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }}
+
+                    // Extra movement when hovering
+                    whileHover={{
+                      scale: 1.08,
+                      x: 5,
+                      transition: {
+                        duration: 0.6,
+                        ease: "easeOut",
+                      },
+                    }}
                   />
                 </div>
 
@@ -384,7 +406,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section id="projects" className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:px-12">
+      <section id="projects" className="mx-auto max-w-7xl px-6 py-20 md:px-10 lg:px-12 ">
         <motion.div
           initial="hidden"
           whileInView="visible"
@@ -397,7 +419,7 @@ export default function Home() {
           <h2 className="mt-4 text-3xl font-black tracking-[-0.05em] text-slate-900">Selected work built end-to-end with product thinking.</h2>
         </motion.div>
 
-           <div className="mt-10 grid gap-6md:grid-cols-2 xl:grid-cols-3">
+           <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3 m-5">
           {projects.map((project, index) => {
             const CardWrapper = project.liveUrl ? 'a' : 'div';
             const linkProps = project.liveUrl
